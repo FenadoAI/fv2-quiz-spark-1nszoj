@@ -1,38 +1,27 @@
-import { useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
+import QuizApp from "./components/QuizApp.jsx";
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE = process.env.REACT_APP_API_URL || 'https://8001-i2x3zbtnb3mgu11h749ho.e2b.app';
 const API = `${API_BASE}/api`;
 
 const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://fenado.ai"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://fenado.ai/fenado-logo.png" className="w-32 h-32 rounded-lg cursor-pointer" alt="Fenado Logo" />
-        </a>
-        <p className="mt-5">Your AI-powered app will appear here</p>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="container mx-auto px-4 py-8">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">
+            🧠 AI Quiz Generator
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Generate instant quizzes on any topic to test your knowledge.
+            Powered by AI to create engaging, educational questions.
+          </p>
+        </header>
+        <QuizApp apiBase={API} />
+      </div>
     </div>
   );
 };
